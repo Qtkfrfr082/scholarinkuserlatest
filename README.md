@@ -32,8 +32,26 @@ type: npm install -D tailwindcss postcss autoprefixer
 
 type: npx tailwindcss init -p
 
-#do this after you see the tailwind.config.js to your files
+# do this after you see the tailwind.config.js to your files
+
 ![image](https://github.com/user-attachments/assets/ce017b25-6464-44c4-8022-6b836be225f6)
+
+# do this to your index.css
+
+![image](https://github.com/user-attachments/assets/c33724d5-1116-4039-960b-e9421c1cc07c)
+
+# installing react-router-dom
+
+type: npm install react-router-dom (how to use see my code how to import it)
+
+# installing lucid-react
+
+type: npm install lucide-react (how to use see my code how to import it)
+
+# consider it done! 
+
+
+
 
 
 
