@@ -27,7 +27,7 @@ function SignUp() {
     const navigate = useNavigate(); // Hook for navigation
       
      const handleBackClick = () => {
-          navigate('/login'); // Redirects to login page
+          navigate('/signup'); // Redirects to login page
         };
         
   
@@ -61,7 +61,7 @@ return (
         <div className="input-group">
         <button
           type="button"
-          className="bg-white text-black relative w-full rounded-md shadow-sm pl-3 pr-10 py-2 text-left cursor-pointer focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+          className="bg-white text-black relative w-full shadow-sm pl-3 pr-10 py-2 text-left cursor-pointer focus:outline-none focus:ring-1  rounded-full sm:text-sm hover:border-emerald-600"
           onClick={() => setIsOpen(!isOpen)}
         >
           <span className="block truncate">
@@ -72,7 +72,7 @@ return (
           </span>
         </button>
         {isOpen && (
-          <div className="bg-white absolute z-10 mt-1 w-80 shadow-lg max-h-60 rounded-md py-1 text-base ring-1  ring-opacity-5 overflow-auto focus:outline-none sm:text-sm ">
+          <div className="bg-white absolute z-10 ml-2 mt-1 w-80  max-h-60  py-1 text-base ring-1  ring-opacity-5 overflow-auto  sm:text-sm  rounded-md ">
             {courses.map((course) => (
               <button
                 key={course.id}
@@ -80,12 +80,12 @@ return (
                   selectedCourse?.id === course.id
                     ? 'bg-blue-100 text-blue-900'
                     : 'text-gray-900'
-                } cursor-pointer select-none relative py-2 pl-3 pr-9 w-full text-left hover:bg-blue-50 bg-transparent`}
+                } cursor-pointer select-none relative py-2 pl-3 pr-9 w-full text-left hover:border-emerald-600 bg-transparent rounded-full `}
                 onClick={() => handleSelect(course)}
               >
                 <div className="flex flex-col">
                   <span className="font-medium block truncate ">{course.name}</span>
-                  <span className="text-sm text-gray-500">{course.category}</span>
+      
                 </div>
               </button>
             ))}

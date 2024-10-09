@@ -4,7 +4,9 @@ export default {
   content: [ "./index.html",
     "./src/**/*.{js,jsx,ts,tsx}",],
   theme: {
-    extend: {},
+    extend: {boxShadow: {
+      'custom-green': '0 0 0 2px rgba(5, 150, 105, 0.2)',
+    },},
   },
   plugins: [],
 }
