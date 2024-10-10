@@ -3,14 +3,15 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../Css/Signup.css'
 import BackButton from '../assets/Icons/back-square.svg'
+import ArrowImage from '../assets/Icons/arrow-right-.svg'
 
 function SignUp() {
     const navigate = useNavigate(); // Hook for navigation
       
-     const handleBackClick = () => {
+    const handleBackClick = () => {
           navigate('/'); // Redirects to login page
         };
-      const handleNextClick = () => {
+    const handleNextClick = () => {
           navigate('/nextSignUp'); // Redirects to login page
         };
     const [studentNum, setStudentNum] = useState('');
@@ -89,11 +90,12 @@ return (
             required
           />
         </div>
-        
         <button type="submit" className="next-button" onClick={handleNextClick}>
-          <p className="Next-text">Next</p>
-          <span className="arrow">→</span>
-        </button>
+            <p className="Next-text">Next</p>
+            <span className="arrow">
+              <img src={ArrowImage} alt="ArrowNext" className="arrow-image" /></span>
+          </button>
+       
       </form>
 
      

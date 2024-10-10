@@ -5,16 +5,41 @@
     min-height: 100vh;
     background-image: radial-gradient(circle, #9dc284, #a5ca8c, #add194, #b5d99c, #bde1a4, #bae4ac, #b7e7b3, #b4eabb, #a8e8c4, #9fe5cd, #99e2d4, #96deda);
     padding: 1rem;
+    z-index: 10;
 }
 .signup-form-container {
-    background-color: #f1f1f1;
+    background-color: #f1f1f11f;
     border-radius: 1rem;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     padding: 2rem;
     width: 100%;
     max-width: 400px;
     position: relative;
+    z-index: 9;
     
+  }
+  .signup-container-login {
+    position: relative; /* Allow absolute positioning within this container */
+    overflow: hidden;  /* Prevent overflow issues */
+    height: 100vh;    /* Ensure the full height of the viewport */
+  }
+  
+  
+  .svg-container {
+    position: absolute;
+    top: -226px;
+    right: -293px;
+    width: 700px;
+    height: auto;
+    z-index: 8;
+  }
+  .svg-container-2 {
+    position: absolute;
+    bottom: -234px;
+    left: -320px;
+    width: 700px;
+    height: auto;
+    z-index: 8;
   }
   .back-button-container {
     position: absolute;
@@ -95,7 +120,11 @@
     border-color: #059669;
     box-shadow: 0 0 0 2px rgba(5, 150, 105, 0.2);
   }
-
+  .arrow-image {
+    width: 1.5rem; /* Adjust the size as needed */
+    height: auto;
+    
+  }
   .next-button {
     background-color: #e0e0e0; /* Light gray background */
     color: black; /* Black text */
