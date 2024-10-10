@@ -89,6 +89,7 @@
     border-radius: 0.5rem;
     padding: 1rem;
     margin-bottom: 1rem;
+    color: red;
   }
   
   .error-icon {
@@ -111,7 +112,7 @@
     border-radius: 9999px;
     font-size: 1rem;
     transition: all 0.2s;
-    background-color: transparent;
+    background-color: rgba(255, 255, 255, 0.445);
     color: black;
   }
   
@@ -170,7 +171,7 @@
       border: 1px solid #ccc;   /* Light border */
       border-radius: 4px;       /* Rounded corners */
       box-sizing: border-box;   /* Ensure padding is inside the width */
-      background-color: white;
+      background-color: rgba(255, 255, 255, 0.445);
       cursor: pointer;
       transition: all 0.3s ease-in-out; /* Smooth transition */
     }
