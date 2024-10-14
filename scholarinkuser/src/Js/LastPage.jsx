@@ -6,14 +6,8 @@ import ArrowImage from '../assets/Icons/arrow-right-.svg'
 import { AlertCircle } from 'lucide-react';
 function SignUp() {
       
-<<<<<<< Updated upstream
    
-=======
-      const handleBackClick = () => {
-            navigate('/nextSignUp'); // Redirects to the previous page
-        };
      
->>>>>>> Stashed changes
         const [Email, setEmail] = useState('');
         const [Password, setPassword] = useState('');
         const [ConfirmPass, setConfirmPass] = useState('');
@@ -43,7 +37,7 @@ function SignUp() {
   const navigate = useNavigate(); // Hook for navigation
       
   const handleBackClick = () => {
-          navigate('/signup'); // Redirects to back
+          navigate('/nextSignUp'); // Redirects to back
         };
   const handleNextClick = () => {
           navigate('/'); // Redirects to login page
