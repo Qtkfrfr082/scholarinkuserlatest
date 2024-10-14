@@ -10,7 +10,7 @@ function SignUp() {
   const navigate = useNavigate(); // Hook for navigation
       
   const handleBackClick = () => {
-        navigate('/'); // Redirects to login page
+        navigate('/signup'); // Redirects to login page
       };
   const handleNextClick = () => {
         navigate('/LastPage'); // Redirects to login page

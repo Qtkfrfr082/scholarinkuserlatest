@@ -15,9 +15,8 @@ export default function Login() {
     e.preventDefault();
     
     // Dummy login validation logic
-    if (email === 'test@example.com' && password === 'password123') {
-      alert('Login successful');
-      setError('');
+    if (email === 'test@dyci.edu.ph' && password === 'password123') {
+      navigate('/Home'); // Redirects to login page
     } else {
       setError('Invalid email or password');
     }
