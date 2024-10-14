@@ -1,187 +1,187 @@
 .signup-container-login {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    background-image: radial-gradient(circle, #9dc284, #a5ca8c, #add194, #b5d99c, #bde1a4, #bae4ac, #b7e7b3, #b4eabb, #a8e8c4, #9fe5cd, #99e2d4, #96deda);
-    padding: 1rem;
-    z-index: 10;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-image: radial-gradient(circle, #9dc284, #a5ca8c, #add194, #b5d99c, #bde1a4, #bae4ac, #b7e7b3, #b4eabb, #a8e8c4, #9fe5cd, #99e2d4, #96deda);
+  padding: 1rem;
+  z-index: 10;
 }
 .signup-form-container {
-    background-color: #f1f1f11f;
-    border-radius: 1rem;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    padding: 2rem;
-    width: 100%;
-    max-width: 400px;
-    position: relative;
-    z-index: 9;
-    
-  }
-  .signup-container-login {
-    position: relative; /* Allow absolute positioning within this container */
-    overflow: hidden;  /* Prevent overflow issues */
-    height: 100vh;    /* Ensure the full height of the viewport */
-  }
+  background-color: #f1f1f11f;
+  border-radius: 1rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  width: 100%;
+  max-width: 400px;
+  position: relative;
+  z-index: 9;
   
+}
+.signup-container-login {
+  position: relative; /* Allow absolute positioning within this container */
+  overflow: hidden;  /* Prevent overflow issues */
+  height: 100vh;    /* Ensure the full height of the viewport */
+}
+
+
+.svg-container {
+  position: absolute;
+  top: -226px;
+  right: -293px;
+  width: 700px;
+  height: auto;
+  z-index: 8;
+}
+.svg-container-2 {
+  position: absolute;
+  bottom: -234px;
+  left: -320px;
+  width: 700px;
+  height: auto;
+  z-index: 8;
+}
+.back-button-container {
+  position: absolute;
+  top: -0rem;  /* Distance from the top */
+  left: -0.5rem; /* Distance from the left */
+  border: none;
+  outline: none; /* Remove default focus outline */
+}
+.button-container{
+  background: none;
+  border: none;
+  cursor: pointer;
+  outline: none; /* Remove default focus outline */
+
+}
+.back-button {
+  width: 30px;  /* Adjust size */
+  height: 30px; /* Adjust size */
+  display: block; /* Ensures the image is treated as a block-level element */
+}
+
+/* Focus state: same size as the icon */
+.button-container:focus, .button-container:active {
+  outline: 2px solid #a8d8b9; /* Change color to match your design */
+  outline-offset: -20px;        /* Ensures the outline isn't too far from the icon */
+  border-radius: 10%;         /* Ensure the focus ring follows the circular button */
+}
+
+/* Optional: Add hover state */
+.button-container:hover .back-button {
+  transform: scale(1.1); /* Slight increase in size on hover */
+}
+
+.signup-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  text-align: left;
+  margin-bottom: 2rem;
+  color: black;
   
-  .svg-container {
-    position: absolute;
-    top: -226px;
-    right: -293px;
-    width: 700px;
-    height: auto;
-    z-index: 8;
-  }
-  .svg-container-2 {
-    position: absolute;
-    bottom: -234px;
-    left: -320px;
-    width: 700px;
-    height: auto;
-    z-index: 8;
-  }
-  .back-button-container {
-    position: absolute;
-    top: -0rem;  /* Distance from the top */
-    left: -0.5rem; /* Distance from the left */
-    border: none;
-    outline: none; /* Remove default focus outline */
-  }
-  .button-container{
-    background: none;
-    border: none;
-    cursor: pointer;
-    outline: none; /* Remove default focus outline */
- 
-  }
-  .back-button {
-    width: 30px;  /* Adjust size */
-    height: 30px; /* Adjust size */
-    display: block; /* Ensures the image is treated as a block-level element */
-  }
+}
+.error-alert {
+  display: flex;
+  align-items: center;
+  background-color: #fee2e2;
+  border: 1px solid #fecaca;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  color: red;
+}
+
+.error-icon {
+  width: 1.25rem;
+  height: 1.25rem;
+  color: #dc2626;
+  margin-right: 0.5rem;
+}
+
+.signup-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.signup-input-field {
+  width: 100%;
+  padding: 0.5rem 1rem;
+  border: 1px solid #d1d5db;
+  border-radius: 9999px;
+  font-size: 1rem;
+  transition: all 0.2s;
+  background-color: rgba(255, 255, 255, 0.445);
+  color: black;
+}
+
+.signup-input-field:focus {
+  outline: none;
+  border-color: #059669;
+  box-shadow: 0 0 0 2px rgba(5, 150, 105, 0.2);
+}
+.arrow-image {
+  width: 1.5rem; /* Adjust the size as needed */
+  height: auto;
   
-  /* Focus state: same size as the icon */
-  .button-container:focus, .button-container:active {
-    outline: 2px solid #a8d8b9; /* Change color to match your design */
-    outline-offset: -20px;        /* Ensures the outline isn't too far from the icon */
-    border-radius: 10%;         /* Ensure the focus ring follows the circular button */
-  }
-  
-  /* Optional: Add hover state */
-  .button-container:hover .back-button {
-    transform: scale(1.1); /* Slight increase in size on hover */
+}
+.next-button {
+  background-color: #e0e0e0; /* Light gray background */
+  color: black; /* Black text */
+  border: none;
+  border-radius: 20px; /* Rounded corners */
+  padding: 1px 20px; /* Padding for the button */
+  display: flex; /* Use flexbox for alignment */
+  align-items: center; /* Center align items vertically */
+  cursor: pointer; /* Cursor changes to pointer on hover */
+  position: relative; /* For the circular effect */
+  font-size: 16px; /* Font size */
+  align-self: center;
+}
+.next-button .arrow {
+  background-color: #a8d8b9; /* Green circular background */
+  border-radius: 50%; /* Make the arrow background circular */
+  width: 40px; /* Width of the circle */
+  height: 40px; /* Height of the circle */
+  display: flex; /* Use flexbox for centering */
+  align-items: center; /* Center align the arrow */
+  justify-content: center; /* Center align the arrow */
+  margin: 0px -20px 0px 10px; /* Space between text and circle */
+}
+
+.next-button:hover {
+  background-color: #c0c0c0;
+}
+.next-button .arrow:hover {
+background-color: #91d0a0; /* Darker green on arrow hover */
+}
+@media (max-width: 640px) {
+  .signup-form-container {
+    padding: 1.5rem;
   }
 
   .signup-title {
-    font-size: 2.5rem;
-    font-weight: bold;
-    text-align: left;
-    margin-bottom: 2rem;
-    color: black;
-    
+    font-size: 3rem;
   }
-  .error-alert {
-    display: flex;
-    align-items: center;
-    background-color: #fee2e2;
-    border: 1px solid #fecaca;
-    border-radius: 0.5rem;
-    padding: 1rem;
-    margin-bottom: 1rem;
-    color: red;
-  }
-  
-  .error-icon {
-    width: 1.25rem;
-    height: 1.25rem;
-    color: #dc2626;
-    margin-right: 0.5rem;
-  }
-
-  .signup-form {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-  }
-  
-  .signup-input-field {
-    width: 100%;
-    padding: 0.5rem 1rem;
-    border: 1px solid #d1d5db;
-    border-radius: 9999px;
-    font-size: 1rem;
-    transition: all 0.2s;
+  select {
+    width: 100%;              /* Full width of the container */
+    padding: 8px 12px;        /* Comfortable padding */
+    font-size: 16px;          /* Base font size */
+    border: 1px solid #ccc;   /* Light border */
+    border-radius: 4px;       /* Rounded corners */
+    box-sizing: border-box;   /* Ensure padding is inside the width */
     background-color: rgba(255, 255, 255, 0.445);
-    color: black;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out; /* Smooth transition */
   }
-  
-  .signup-input-field:focus {
-    outline: none;
-    border-color: #059669;
-    box-shadow: 0 0 0 2px rgba(5, 150, 105, 0.2);
+  option{
+    position: absolute;
   }
-  .arrow-image {
-    width: 1.5rem; /* Adjust the size as needed */
-    height: auto;
-    
-  }
-  .next-button {
-    background-color: #e0e0e0; /* Light gray background */
-    color: black; /* Black text */
-    border: none;
-    border-radius: 20px; /* Rounded corners */
-    padding: 1px 20px; /* Padding for the button */
-    display: flex; /* Use flexbox for alignment */
-    align-items: center; /* Center align items vertically */
-    cursor: pointer; /* Cursor changes to pointer on hover */
-    position: relative; /* For the circular effect */
-    font-size: 16px; /* Font size */
-    align-self: center;
-  }
-  .next-button .arrow {
-    background-color: #a8d8b9; /* Green circular background */
-    border-radius: 50%; /* Make the arrow background circular */
-    width: 40px; /* Width of the circle */
-    height: 40px; /* Height of the circle */
-    display: flex; /* Use flexbox for centering */
-    align-items: center; /* Center align the arrow */
-    justify-content: center; /* Center align the arrow */
-    margin: 0px -20px 0px 10px; /* Space between text and circle */
-  }
-  
-  .next-button:hover {
-    background-color: #c0c0c0;
-  }
-  .next-button .arrow:hover {
-  background-color: #91d0a0; /* Darker green on arrow hover */
-}
-  @media (max-width: 640px) {
-    .signup-form-container {
-      padding: 1.5rem;
-    }
-  
-    .signup-title {
-      font-size: 3rem;
-    }
+  @media (max-width: 767px) {
     select {
-      width: 100%;              /* Full width of the container */
-      padding: 8px 12px;        /* Comfortable padding */
-      font-size: 16px;          /* Base font size */
-      border: 1px solid #ccc;   /* Light border */
-      border-radius: 4px;       /* Rounded corners */
-      box-sizing: border-box;   /* Ensure padding is inside the width */
-      background-color: rgba(255, 255, 255, 0.445);
-      cursor: pointer;
-      transition: all 0.3s ease-in-out; /* Smooth transition */
+      font-size: 14px;         /* Smaller font size for mobile */
+      padding: 6px 8px;        /* Smaller padding for mobile */
     }
-    option{
-      position: absolute;
-    }
-    @media (max-width: 767px) {
-      select {
-        font-size: 14px;         /* Smaller font size for mobile */
-        padding: 6px 8px;        /* Smaller padding for mobile */
-      }
 }
-  }
+}

@@ -5,12 +5,13 @@ import '../Css/Signup.css'
 import BackButton from '../assets/Icons/back-square.svg'
 import ArrowImage from '../assets/Icons/arrow-right-.svg'
 import { ChevronDown } from 'lucide-react';
+import { AlertCircle } from 'lucide-react';
 
 function SignUp() {
   const navigate = useNavigate(); // Hook for navigation
       
   const handleBackClick = () => {
-        navigate('/signup'); // Redirects to login page
+        navigate('/'); // Redirects to login page
       };
   const handleNextClick = () => {
         navigate('/LastPage'); // Redirects to login page
@@ -87,7 +88,16 @@ function SignUp() {
   
   const handleSubmit = (e) => {
       e.preventDefault();
-    
+      if (!selectedCourse || !selectedProgram || !selectedYear) {
+        setError('All fields are required.');
+        return;
+    }
+
+    // Reset error if all fields are filled
+    setError('');
+
+    // After successful form submission, navigate to the next page
+    navigate('/LastPage');
   };
 return (
   
@@ -114,12 +124,7 @@ return (
             <img src={BackButton} alt="Back Button" className="back-button" />
           </button>
         </div>
-        {error && (
-          <div className="error-alert">
-            <AlertCircle className="error-icon" />
-            <span>{error}</span>
-          </div>
-        )}
+       
         <p className="signup-title">Create Your Account</p>
         <form onSubmit={handleSubmit} className="login-form">
           {/* Course Selection */}
@@ -229,8 +234,13 @@ return (
             )}
            
           </div>
-
-          <button type="submit" className="next-button" onClick={handleNextClick}>
+          {error && (
+          <div className="error-alert">
+            <AlertCircle className="error-icon" />
+            <span>{error}</span>
+          </div>
+        )}
+          <button type="submit" className="next-button" onSubmit={handleNextClick}>
             <p className="Next-text">Next</p>
             <span className="arrow">
               <img src={ArrowImage} alt="ArrowNext" className="arrow-image" /></span>

@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import '../Css/Signup.css'
 import BackButton from '../assets/Icons/back-square.svg'
 import ArrowImage from '../assets/Icons/arrow-right-.svg'
+import { AlertCircle } from 'lucide-react';
 
 function SignUp() {
     const navigate = useNavigate(); // Hook for navigation
@@ -18,12 +19,25 @@ function SignUp() {
     const [Lname, setLname] = useState('');
     const [Fname, setFname] = useState('');
     const [Mname, setMname] = useState('');
+  
+    const [errorMessage, setErrorMessage] = useState('');
+  
     const [error, setError] = useState('');
   
-    const handleSubmit = (e) => {
+  const handleSubmit = (e) => {
       e.preventDefault();
-    
+      if (!studentNum || !Lname || !Mname || !Fname) {
+        setError('All fields are required.');
+        return;
+    }
+
+    // Reset error if all fields are filled
+    setError('');
+
+    // After successful form submission, navigate to the next page
+    navigate('/nextSignUp');
   };
+
 return (
     <div className="signup-container-login">
       <div className="svg-container">
@@ -53,12 +67,7 @@ return (
       />
     </button>
   </div>
-      {error && (
-        <div className="error-alert">
-          <AlertCircle className="error-icon" />
-          <span>{error}</span>
-        </div>
-      )}
+      
       <p className="signup-title">Create Your Account</p>
       <form onSubmit={handleSubmit} className="login-form">
         <div className="input-group">
@@ -68,7 +77,6 @@ return (
             value={studentNum}
             onChange={(e) => setStudentNum(e.target.value)}
             className="input-field"
-            required
           />
         </div>
 
@@ -79,7 +87,6 @@ return (
             value={Lname}
             onChange={(e) => setLname(e.target.value)}
             className="input-field"
-            required
           />
         </div>
 
@@ -90,7 +97,7 @@ return (
             value={Fname}
             onChange={(e) => setFname(e.target.value)}
             className="input-field"
-            required
+          
           />
         </div>
 
@@ -101,10 +108,16 @@ return (
             value={Mname}
             onChange={(e) => setMname(e.target.value)}
             className="input-field"
-            required
+           
           />
         </div>
-        <button type="submit" className="next-button" onClick={handleNextClick}>
+        {error && (
+          <div className="error-alert">
+            <AlertCircle className="error-icon" />
+            <span>{error}</span>
+          </div>
+        )}
+        <button type="submit" className="next-button">
             <p className="Next-text">Next</p>
             <span className="arrow">
               <img src={ArrowImage} alt="ArrowNext" className="arrow-image" /></span>
