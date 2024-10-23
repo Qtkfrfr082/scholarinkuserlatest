@@ -17,7 +17,7 @@ const EditProfile = () => {
   });
 
   const navigate = useNavigate();
-  const userId = '0'; // Replace with actual userId in real use case
+  const userId = localStorage.getItem('UserId'); // Retrieve the UserId from localStorage
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -36,17 +36,17 @@ const EditProfile = () => {
           College: userData.College || '',
           Program: userData.Program || '',
           YearLevel: userData.YearLevel || '',
-          Profile: userData.Profile || null // Load profile picture URL from user data
-         
+          Profile: userData.Profile || null
         });
       } catch (error) {
         console.error('Error:', error);
       }
     };
 
-    fetchUserData();
+    if (userId) {
+      fetchUserData();
+    }
   }, [userId]);
-
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({

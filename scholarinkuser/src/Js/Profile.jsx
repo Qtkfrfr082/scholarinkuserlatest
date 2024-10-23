@@ -7,28 +7,22 @@ import BackButton from '../assets/Icons/back-square.svg';
 const Profile = () => {
   const [user, setUser] = useState(null);
   const navigate = useNavigate();
-  const userId = '0'; // Hardcoded for testing
+  const userId = localStorage.getItem('UserId');
 
   useEffect(() => {
-    const fetchUserData = async () => {
-      try {
-        const response = await fetch(`http://localhost:5456/user/${userId}`);
-        if (!response.ok) {
-          const errorData = await response.json();
-          console.error('Error fetching user data:', errorData);
-          throw new Error(errorData.message || 'Failed to fetch user data');
-        }
-        const userData = await response.json();
-        setUser(userData);
-        
-      } catch (error) {
-        console.error('Error:', error);
-      }
-    };
+    const userId = localStorage.getItem('UserId'); // Retrieve UserId from localStorage
 
-    fetchUserData();
-    
-  }, [userId]);
+    if (userId) {
+      fetch(`http://localhost:5456/user/${userId}`)
+        .then((response) => response.json())
+        .then((data) => setUser(data))
+        .catch((error) => console.error('Error fetching user data:', error));
+    }
+  }, []);
+
+  if (!user) {
+    return <div>Loading...</div>;
+  }
 
   const handleBackClick = () => {
     navigate('/Home'); // Redirects to the previous page

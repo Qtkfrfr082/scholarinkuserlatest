@@ -6,6 +6,7 @@ import multer from 'multer';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import fs from 'fs';
+import bcrypt from 'bcrypt';// If using password hashing
 
 const app = express();
 const port = 5456;
@@ -42,6 +43,50 @@ const storage = multer.diskStorage({
   });
   const upload = multer({ storage });
   
+  /*app.post('/login', (req, res) => {
+    const { email, password } = req.body;
+  
+    const query = 'SELECT * FROM user WHERE Email = ?';
+    db.query(query, [email], (err, result) => {
+      if (err) {
+        return res.status(500).json({ error: 'Database error' });
+      }
+  
+      if (result.length === 0) {
+        return res.status(400).json({ error: 'Invalid email or password' });
+      }
+  
+      const user = result[0];
+  
+      // If passwords are hashed
+      bcrypt.compare(password, user.Password, (err, isMatch) => {
+        if (err) throw err;
+  
+        if (isMatch) {
+          return res.json({ userId: user.UserId }); // Send back userId (or token)
+        } else {
+          return res.status(401).json({ error: 'Invalid email or password' });
+        }
+      });
+    });
+  });*/
+  app.post('/login', (req, res) => {
+    const { email, password } = req.body;
+  
+    const query = 'SELECT * FROM user WHERE Email = ? AND Password = ?'; // Assuming no password hashing for now
+    db.query(query, [email, password], (err, results) => {
+      if (err) {
+        return res.status(500).json({ message: 'Server error' });
+      }
+  
+      if (results.length > 0) {
+        const user = results[0];
+        return res.json({ message: 'Login successful', UserId: user.UserId });
+      } else {
+        return res.status(401).json({ message: 'Invalid email or password' });
+      }
+    });
+  });
   // Route to handle user profile update (including image upload)
   app.put('/user/:id/edit', upload.single('Profile'), (req, res) => {
     const userId = req.params.id;
@@ -163,26 +208,61 @@ app.post('/department', (req, res) => {
     res.status(200).json({ message: 'Stored temporarily', temporaryData });
 });
 // Endpoint to store user details and finalize the data insertion
-    app.post('/pass-user', (req, res) => {
-        const { Email, Password } = req.body;
-    
-        if (!Email || !Password || !temporaryData.studentNum || !temporaryData.Lname || !temporaryData.Fname || !temporaryData.roleId || !temporaryData.selectedDepartment || !temporaryData.selectedCourse|| !temporaryData.selectedYear) {
-            return res.status(400).json({ message: 'Email and password are required' });
-        }
-    // Now, insert into the database
-    const query = 'INSERT INTO user (StudentNum, Lname, Fname, Mname, RoleId, Email, Password, College, Program, YearLevel) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
-    
-    db.query(query, [temporaryData.studentNum, temporaryData.Lname, temporaryData.Fname,temporaryData.Mname, temporaryData.roleId, Email, Password, temporaryData.selectedDepartment, temporaryData.selectedCourse, temporaryData.selectedYear  ], (error, results) => {
-        if (error) {
-            console.error('Error inserting user:', error);
+const generateRandomUserId = () => {
+    // Generate a random UserId (for example, a 6-digit number or a custom format)
+    return Math.floor(100000 + Math.random() * 900000); // Generates a 6-digit number
+};
+
+const insertNewUser = (Email, Password, UserId, res) => {
+    const insertUserQuery = 'INSERT INTO user (UserId, Lname, Fname, Mname, RoleId, Email, Password, College, Program, YearLevel) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
+
+    db.query(insertUserQuery, [UserId, temporaryData.Lname, temporaryData.Fname, temporaryData.Mname, temporaryData.roleId, Email, Password, temporaryData.selectedDepartment, temporaryData.selectedCourse, temporaryData.selectedYear], (insertError, insertResults) => {
+        if (insertError) {
+            console.error('Error inserting user:', insertError);
             return res.status(500).json({ message: 'Error inserting user' });
         }
 
-        // Clear the temporary data after insertion
+        // Clear the temporary data after successful insertion
         temporaryData = {};
 
-        res.status(201).json({ message: 'User created successfully!' });
+        res.status(201).json({ message: 'User created successfully!', UserId });
     });
+};
+
+const checkIfUserIdExists = (Email, Password, UserId, res) => {
+    const checkUserIdQuery = 'SELECT * FROM user WHERE UserId = ?';
+
+    db.query(checkUserIdQuery, [UserId], (checkError, checkResults) => {
+        if (checkError) {
+            console.error('Error checking UserId:', checkError);
+            return res.status(500).json({ message: 'Database error' });
+        }
+
+        if (checkResults.length > 0) {
+            // UserId already exists, generate a new one and check again
+            const newUserId = generateRandomUserId();
+            console.log('UserId exists, generating new UserId:', newUserId);
+            checkIfUserIdExists(Email, Password, newUserId, res);
+        } else {
+            // UserId is unique, proceed to insert the user
+            insertNewUser(Email, Password, UserId, res);
+        }
+    });
+};
+
+app.post('/pass-user', (req, res) => {
+    const { Email, Password } = req.body;
+
+    // Validate that all required fields are present
+    if (!Email || !Password || !temporaryData.Lname || !temporaryData.Fname || !temporaryData.roleId || !temporaryData.selectedDepartment || !temporaryData.selectedCourse || !temporaryData.selectedYear) {
+        return res.status(400).json({ message: 'All fields are required' });
+    }
+
+    // Start by using the provided UserId, if any, or generate a new random one
+    const initialUserId = temporaryData.UserId || generateRandomUserId();
+
+    // Check if the UserId already exists, and if so, generate a new one until it's unique
+    checkIfUserIdExists(Email, Password, initialUserId, res);
 });
 
 // Start the server

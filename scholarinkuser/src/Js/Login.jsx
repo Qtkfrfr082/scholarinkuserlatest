@@ -11,14 +11,28 @@ export default function Login() {
   const handleSignClick = () => {
     navigate('/role'); // Redirects to login page
   };
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    
     // Dummy login validation logic
-    if (email === 'test@dyci.edu.ph' && password === 'password123') {
-      navigate('/Home'); // Redirects to login page
-    } else {
-      setError('Invalid email or password');
+    try {
+      const response = await fetch('http://localhost:5456/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        localStorage.setItem('UserId', data.UserId); // Save the userId or token in localStorage
+        navigate('/Home'); // Redirect to home page after successful login
+      } else {
+        setError('Invalid email or password');
+      }
+    } catch (error) {
+      console.error('Error during login:', error);
+      setError('An error occurred. Please try again.');
     }
   };
 
