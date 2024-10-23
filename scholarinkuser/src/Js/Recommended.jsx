@@ -1,5 +1,5 @@
 import React from 'react';
-import '../Css/Recommended.css';
+import '../Css/scrollbar.css';
 
 const BooksCarousel1 = () => {
   const books = [
@@ -15,13 +15,13 @@ const BooksCarousel1 = () => {
   return (
 
 
-    <div className="w-full overflow-x-scroll mt-16 scrollbar-hide">
+    <div className="w-screen overflow-x-scroll mt-1 scrollbar-hide">
         
-      <div className="flex space-x-4">
+      <div className="flex space-x-4 pl-4 pr-4">
         {books.map((book) => (
-          <div key={book.id} className="min-w-[150px]">
-            <img src={book.image} alt={book.title} className="w-full h-auto rounded-lg shadow-lg" />
-            <h3 className="mt-2 text-center">{book.title}</h3>
+          <div key={book.id} className="min-w-[110px] ">
+            <img src={book.image} alt={book.title} className="w-full h-44  rounded-lg shadow-lg" />
+            <h3 className="mt-2 text-center text-black">{book.title}</h3>
           </div>
         ))}
       </div>

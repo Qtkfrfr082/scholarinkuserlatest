@@ -1,11 +1,15 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const TopBar = () => {
+  const navigate = useNavigate();
+
   return (
-    <div className="bg-gray-100 shadow-md p-4 flex  sm:flex-row justify-between items-center">
+    <div className="bg-transparent shadow-md p-4 flex  sm:flex-row justify-between items-center">
       {/* Left Section: Profile Icon and Greeting */}
       <div className="flex items-center mb-2 sm:mb-0">
         <svg
+          onClick={() => navigate('/Profile')}
           xmlns="http://www.w3.org/2000/svg"
           className="h-6 w-6"
           fill="none"

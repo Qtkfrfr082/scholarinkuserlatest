@@ -3,16 +3,26 @@
     justify-content: center;
     min-height: 100vh;
     background-image: radial-gradient(circle, #9dc284, #a5ca8c, #add194, #b5d99c, #bde1a4, #bae4ac, #b7e7b3, #b4eabb, #a8e8c4, #9fe5cd, #99e2d4, #96deda);
-    padding: 1rem;
     z-index: 10;
+    
   }
   .RecomText {
     font-size: 1.8rem;
     font-weight: bold;
     text-align: left;
-    margin-bottom: 2rem;
     color: black;
-    position:absolute;
+    padding-left: 1rem;
+    
+    
+  }
+  .Sall {
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-align: right;
+    color: black;
+    padding-right: 1rem;
+    
+    
     
   }
 

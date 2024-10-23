@@ -1,5 +1,5 @@
 
-import { useState } from 'react';
+import { useState ,  useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../Css/Signup.css'
 import BackButton from '../assets/Icons/back-square.svg'
@@ -10,32 +10,54 @@ function SignUp() {
     const navigate = useNavigate(); // Hook for navigation
       
     const handleBackClick = () => {
-          navigate('/'); // Redirects to login page
-        };
-    const handleNextClick = () => {
-          navigate('/nextSignUp'); // Redirects to login page
+          navigate('/role'); // Redirects to login page
         };
     const [studentNum, setStudentNum] = useState('');
     const [Lname, setLname] = useState('');
     const [Fname, setFname] = useState('');
     const [Mname, setMname] = useState('');
-  
+    const [selectedRoleId, setSelectedRoleId] = useState('');
+    const [roles, setRoles] = useState([]);
     const [errorMessage, setErrorMessage] = useState('');
-  
     const [error, setError] = useState('');
-  
-  const handleSubmit = (e) => {
+
+
+  const handleSubmit = async (e) => {
       e.preventDefault();
-      if (!studentNum || !Lname || !Mname || !Fname) {
+      if (!studentNum || !Lname || !Mname || !Fname ) {
         setError('All fields are required.');
         return;
-    }
+      }
 
     // Reset error if all fields are filled
     setError('');
-
+    const userData = {
+      studentNum,
+      Lname,
+      Mname,
+      Fname,
+  };
     // After successful form submission, navigate to the next page
-    navigate('/nextSignUp');
+    try {
+      const response = await fetch('http://localhost:5456/signup', {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(userData),
+      });
+
+      const result = await response.json();
+
+      if (response.ok) {
+        navigate('/nextSignUp');
+      } else {
+        setError(result.message);
+      }
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      setError('An error occurred. Please try again.');
+    }
   };
 
 return (
@@ -111,6 +133,8 @@ return (
            
           />
         </div>
+
+      
         {error && (
           <div className="error-alert">
             <AlertCircle className="error-icon" />

@@ -9,7 +9,7 @@ export default function Login() {
   const [error, setError] = useState('');
   const navigate = useNavigate();
   const handleSignClick = () => {
-    navigate('/signup'); // Redirects to login page
+    navigate('/role'); // Redirects to login page
   };
   const handleSubmit = (e) => {
     e.preventDefault();

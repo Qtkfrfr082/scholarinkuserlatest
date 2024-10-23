@@ -11,94 +11,125 @@ function SignUp() {
   const navigate = useNavigate(); // Hook for navigation
       
   const handleBackClick = () => {
-        navigate('/'); // Redirects to login page
+        navigate('/signup'); // Redirects to login page
       };
   const handleNextClick = () => {
         navigate('/LastPage'); // Redirects to login page
       };
-  const [isOpen, setIsOpen] = useState(false);
-  const [isProgramOpen, setIsProgramOpen] = useState(false);
-  const [isYearLevOpen, setIsYearLevOpen] = useState(false);
-  const [selectedCourse, setSelectedCourse] = useState(null);
-  const [selectedProgram, setSelectedProgram] = useState(null);
-  const [selectedYear, setSelectedYear] = useState(null);
+      const [isOpen, setIsOpen] = useState(false);
+      const [isProgramOpen, setIsProgramOpen] = useState(false);
+      const [isYearLevOpen, setIsYearLevOpen] = useState(false);
+      const [selectedDepartment, setSelectedDepartment] = useState(null);
+      const [selectedProgram, setSelectedProgram] = useState(null);
+      const [selectedYear, setSelectedYear] = useState(null);
   
-  const courses = [
-    { id: 1, name: 'Introduction to React', category: 'Web Development' },
-    { id: 2, name: 'Advanced JavaScript', category: 'Programming' },
-    { id: 3, name: 'UI/UX Design Fundamentals', category: 'Design' },
-    { id: 4, name: 'Node.js Basics', category: 'Backend Development' },
-    { id: 5, name: 'Python for Beginners', category: 'Programming' },
-    { id: 6, name: 'Data Science Essentials', category: 'Data Science' },
-  ];
-  const programs = [
-    { id: 1, name: 'Introduction to React', category: 'Web Development' },
-    { id: 2, name: 'Advanced JavaScript', category: 'Programming' },
-    { id: 3, name: 'UI/UX Design Fundamentals', category: 'Design' },
-    { id: 4, name: 'Node.js Basics', category: 'Backend Development' },
-    { id: 5, name: 'Python for Beginners', category: 'Programming' },
-    { id: 6, name: 'Data Science Essentials', category: 'Data Science' },
-  ];
-  const yearLevels = [
-    { id: 1, name: 'Freshman' },
-    { id: 2, name: 'Sophomore' },
-    { id: 3, name: 'Junior' },
-    { id: 4, name: 'Senior' },
+  const departments = [
+    { id: 1, name: 'IT Department' },
+    { id: 2, name: 'Engineering Department' },
+    { id: 3, name: 'Business Department' },
   ];
 
-  const handleSelectCourse = (course) => {
-    setSelectedCourse(course);
-    setIsOpen(false); 
-    setIsProgramOpen(false); 
-    setIsYearLevOpen(false); 
+  // Programs (Filtered based on department)
+  const allPrograms = {
+    1: [
+      { id: 1, name: 'BS Information Technology' },
+      { id: 2, name: 'BS Computer Science' },
+    ],
+    2: [
+      { id: 3, name: 'BS Computer Engineering' },
+      { id: 4, name: 'BS Electrical Engineering' },
+    ],
+    3: [
+      { id: 5, name: 'BS Business Administration' },
+      { id: 6, name: 'BS Accountancy' },
+    ],
   };
-  
+
+  // Year levels
+  const yearLevels = [
+    { id: 1, name: '1st Year' },
+    { id: 2, name: '2nd Year' },
+    { id: 3, name: '3rd Year' },
+    { id: 4, name: '4th Year' },
+    { id: 5, name: '5th Year' }
+  ];
+
+  const handleSelectDepartment = (department) => {
+    setSelectedDepartment(department);
+    setSelectedProgram(null); // Reset the program when department changes
+    setIsOpen(false);
+  };
+
   const handleSelectProgram = (program) => {
     setSelectedProgram(program);
-    setIsProgramOpen(false); 
-    setIsOpen(false); 
-    setIsYearLevOpen(false); 
+    setIsProgramOpen(false);
   };
+  
   
   const handleSelectYear = (year) => {
     setSelectedYear(year);
-    setIsYearLevOpen(false); 
-    setIsOpen(false); 
-    setIsProgramOpen(false); 
+    setIsYearLevOpen(false);
   };
-  const toggleCourseDropdown = () => {
+
+  const toggleDepartmentDropdown = () => {
     setIsOpen(!isOpen);
-    setIsProgramOpen(false); 
-    setIsYearLevOpen(false); 
+    setIsProgramOpen(false);
+    setIsYearLevOpen(false);
   };
 
   const toggleProgramDropdown = () => {
     setIsProgramOpen(!isProgramOpen);
-    setIsOpen(false); // Close the course dropdown
-    setIsYearLevOpen(false); // Close the year level dropdown
+    setIsOpen(false);
+    setIsYearLevOpen(false);
   };
 
   const toggleYearLevDropdown = () => {
     setIsYearLevOpen(!isYearLevOpen);
-    setIsOpen(false); // Close the course dropdown
-    setIsProgramOpen(false); // Close the program dropdown
+    setIsOpen(false);
+    setIsProgramOpen(false);
   };
 
   const [error, setError] = useState('');
   
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
       e.preventDefault();
-      if (!selectedCourse || !selectedProgram || !selectedYear) {
+      if (!selectedDepartment || !selectedProgram || !selectedYear) {
         setError('All fields are required.');
         return;
-    }
+      }
 
     // Reset error if all fields are filled
     setError('');
 
-    // After successful form submission, navigate to the next page
-    navigate('/LastPage');
-  };
+   
+
+  // Send data to the server
+  try {
+    const response = await fetch('http://localhost:5456/department', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        departmentId: selectedDepartment.name,
+        programId: selectedProgram.name,
+        yearId: selectedYear.name,
+      }),
+    });
+
+    const data = await response.json();
+    if (response.ok) {
+      console.log(data.message); // Success message from the server
+      // Navigate to the next page after successful submission
+      navigate('/LastPage');
+    } else {
+      setError(data.message || 'Failed to create user.');
+    }
+  } catch (error) {
+    setError('An error occurred while submitting the form.');
+    console.error('Error:', error);
+  }
+};
 return (
   
    
@@ -132,10 +163,10 @@ return (
             <button
               type="button"
               className="bg-[rgba(255,255,255,0.445)] text-gray-500 relative w-full shadow-sm pl-3 pr-10 py-3 text-left cursor-pointer focus:outline-none focus:ring-1 rounded-full sm:text-sm hover:border-emerald-600 p-3 border border-gray-300 text-base transition-all duration-200"
-              onClick={toggleCourseDropdown}>
+              onClick={toggleDepartmentDropdown}>
 
               <span className="block truncate">
-                {selectedCourse ? selectedCourse.name : 'Course'}
+                  {selectedDepartment ? selectedDepartment.name : 'Department'}
               </span>
               <span className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
                 <ChevronDown className="h-5 w-5 text-gray-400" aria-hidden="true" />
@@ -144,18 +175,18 @@ return (
 
             {isOpen && (
               <div className="bg-white absolute z-10 ml-3.5 mt-1 w-80 max-h-60 py-1 text-base ring-1 ring-opacity-5 overflow-auto sm:text-sm rounded-md">
-                {courses.map((course) => (
+                {departments.map((department) => (
                   <button
-                    key={course.id}
+                  key={department.id}
                     className={`${
-                      selectedCourse?.id === course.id
+                      selectedDepartment?.id === department.id
                         ? 'bg-blue-100 text-blue-900'
                         : 'text-gray-900'
                     } cursor-pointer select-none relative py-2 pl-3 pr-9 w-full text-left hover:border-emerald-600 bg-transparent rounded-full`}
-                    onClick={() => handleSelectCourse(course)}>
-
+                    onClick={() => handleSelectDepartment(department)}>
+                      
                     <div className="flex flex-col">
-                      <span className="font-medium block truncate">{course.name}</span>
+                      <span className="font-medium block truncate">{department.name}</span>
                     </div>
                   </button>
                 ))}
@@ -168,18 +199,19 @@ return (
             <button
               type="button"
               className="bg-[rgba(255,255,255,0.445)] text-gray-500 relative w-full shadow-sm pl-3 pr-10 py-3 text-left cursor-pointer focus:outline-none focus:ring-1 rounded-full sm:text-sm hover:border-emerald-600 p-3 border border-gray-300 text-base transition-all duration-200 "
-              onClick={toggleProgramDropdown}>
+              onClick={toggleProgramDropdown}
+              disabled={!selectedDepartment}>
 
               <span className="block truncate">
-                {selectedProgram ? selectedProgram.name : 'Program'}
+              {selectedProgram ? selectedProgram.name : 'Program'}
               </span>
               <span className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
                 <ChevronDown className="h-5 w-5 text-gray-400" aria-hidden="true" />
               </span>
             </button>
-            {isProgramOpen && (
+            {isProgramOpen && selectedDepartment && (
               <div className="bg-white absolute z-10 ml-2 mt-1 w-80 max-h-60 py-1 text-base ring-1 ring-opacity-5 overflow-auto sm:text-sm rounded-md">
-                {programs.map((program) => (
+                {allPrograms[selectedDepartment.id].map((program) => (
                   <button
                     key={program.id}
                     className={`${
@@ -188,7 +220,7 @@ return (
                         : 'text-gray-900'
                     } cursor-pointer select-none relative py-2 pl-3 pr-9 w-full text-left hover:border-emerald-600 bg-transparent rounded-full`}
                     onClick={() => handleSelectProgram(program)}>
-
+                        
                     <div className="flex flex-col">
                       <span className="font-medium block truncate">{program.name}</span>
                     </div>

@@ -1,0 +1,152 @@
+/* Container for the whole page */
+.container-edit-profile {
+    display: flex;
+    flex-direction: column;
+    
+    min-height: 100vh;
+    background-image: radial-gradient(circle, #9dc284, #a5ca8c, #add194, #b5d99c, #bde1a4, #bae4ac, #b7e7b3, #b4eabb, #a8e8c4, #9fe5cd, #99e2d4, #96deda);
+    z-index: 10;
+    
+}
+
+/* Header section */
+.profile-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem;
+    background-color: transparent;
+    width: 100%;
+    max-width: 600px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.Edit-text-Container {
+    font-size: 2rem;
+    font-weight: bold;
+    text-align: center;
+    color: black;
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 3rem;
+    
+}
+
+/* Form container */
+.form-container-edit {
+    background-color: #f1f1f11f;
+    border-radius: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+    width: 100%;
+    max-width: 400px;
+    z-index: 9;
+    align-self: center;
+    margin-top: 0.5rem;
+    
+    
+}
+
+.user-edit-info-top {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 1.5rem;
+    padding: 0.5rem;
+    width: 100%;
+   
+}
+
+/* Styling for profile image */
+.user-profile-image {
+    width: 80px; /* Adjust the width */
+    height: 80px; /* Adjust the height */
+    border-radius: 50%; /* Make it circular */
+    object-fit: cover;
+    margin-bottom: 1rem;
+}
+
+/* Styling for the file input */
+.image-upload-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+}
+
+.image-upload-container label {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: black;
+}
+
+.image-upload-container input[type="file"] {
+    display: block;
+    margin-top: 0.5rem;
+    font-size: 1rem;
+}
+
+/* Account info section */
+.user-info-bottom {
+    background-color: #fce7c0a2;
+    border-radius: 1.5rem;
+    padding: 2rem;
+    width: 100%;
+    
+}
+
+/* Account info text fields */
+.input-container {
+    margin-bottom: 1.5rem;
+}
+
+.user-details input {
+    width: 100%;
+    padding: 0.5rem 1rem;
+    border: 1px solid #d1d5db;
+    border-radius: 9999px;
+    font-size: 1.2rem;
+    transition: all 0.2s;
+    background-color: rgba(255, 255, 255, 0.445);
+    color: black;
+    margin-bottom: 1rem;
+}
+.user-details p {
+    font-weight: bold;
+    font-size: 1.2rem;
+    transition: all 0.2s;
+    color: black;
+}
+.user-edit-info-top h2 {
+    font-weight: bold;
+    font-size: 1.5rem;
+    transition: all 0.2s;
+    color: black;
+    
+}
+.save-button-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.save-button {
+    width: 50%;
+    padding: 0.75rem 1rem;
+    background-color: #059669;
+    color: white;
+    border: none;
+    border-radius: 9999px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    margin-top: 1rem;
+   
+}
+
+.save-button:hover {
+    background-color: #047857;
+}

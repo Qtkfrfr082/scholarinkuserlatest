@@ -7,7 +7,7 @@ import { AlertCircle } from 'lucide-react';
 function SignUp() {
       
      const handleBackClick = () => {
-            navigate('/signup'); // Redirects to the previous page
+            navigate('/nextSignUp'); // Redirects to the previous page
         };
         const [Email, setEmail] = useState('');
         const [Password, setPassword] = useState('');
@@ -38,7 +38,7 @@ function SignUp() {
               }
           }
       };
-        const handleSubmit = (e) => {
+      const handleSubmit = async (e) => {
             e.preventDefault();
     
             // Check if fields are empty
@@ -60,11 +60,41 @@ function SignUp() {
     
             // Reset error if form is valid
             setError('');
-    
-            // Simulate form submission or navigate to the next page
-            navigate('/');
-        };
-    
+            const userData = {
+              Email,
+              Password,
+          };
+  
+          // Send data to the server
+          try {
+              const response = await fetch('http://localhost:5456/pass-user', {
+                  method: 'POST',
+                  headers: {
+                      'Content-Type': 'application/json',
+                  },
+                  body: JSON.stringify(userData),
+              });
+  
+              const data = await response.json();
+              if (response.ok) {
+                  console.log(data.message); // Success message from the server
+                  // Reset form fields after successful submission
+                  setEmail('');
+                  setPassword('');
+                  setConfirmPass('');
+                 
+  
+                  // Navigate to another page
+                  navigate('/');
+              } else {
+                  setError(data.message || 'Failed to create user.');
+              }
+          } catch (error) {
+              setError('An error occurred while submitting the form.');
+              console.error('Error:', error);
+          }
+      };
+  
 return (
     <div className="signup-container-login">
     <div className="svg-container">
